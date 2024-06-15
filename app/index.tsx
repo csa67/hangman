@@ -4,36 +4,50 @@ import { Letter } from '@/components/Letter';
 import { Keyboard } from '@/components/Keyboard';
 
 export default function Index() {
-   const initialWord = Array.from({ length: 6 }, () => String.fromCharCode(65 + Math.floor(Math.random() * 26)));
-   console.log(initialWord);
-   const [word, setWord] = useState(initialWord);
-   const[ revealedLetters, setRevealedLetters ] = useState(Array(6).fill(null));
+
+    // Generate a random word with 6 letters
+    const generateWord = () => {
+        const word = [];
+        for (let i = 0; i < 6; i++) {
+            const answer = Math.floor(Math.random() * 26);
+            const letter = String.fromCharCode(65 + answer);
+            word.push(letter);
+        }
+        return word;
+        console.log(word);
+    };
+
+   const [word, setWord] = useState(generateWord());
+   const [ pressedKeys, setPressedKeys ] = useState({});
+   const [ revealedLetters, setRevealedLetters ] = useState([]);
+   const [totalWrongGuesses, setTotalWrongGuesses] = useState(0);
 
    const handleKeyPress = (key) => {
-        const newRevealedLetters = [...revealedLetters];
-        let letterRevealed = false;
-        word.forEach((letter, index) => {
-            if(letter === key && !newRevealedLetters[index]){
-                newRevealedLetters[index] = key;
-                letterRevealed = true;
-            }
-        });
 
-        if(letterRevealed){
-            setRevealedLetters(newRevealedLetters);
-        }
-
-   }
+       const isMatch = word.includes(key);
+       setPressedKeys((prev) => ({ ...prev, [key]: isMatch}));
+       if(isMatch){
+            setRevealedLetters((prev) => [...prev, key]);
+       }else{
+            setTotalWrongGuesses((prevCount) => prevCount + 1);
+       }
+   };
 
   return (
-    <View style={styles.container}>
-        <View style={styles.wordContainer}>
-            {revealedLetters.map((letter, index) => (
-                <Letter key={index} letter={letter}/>
+    <View style={[styles.container, totalWrongGuesses > 8 && styles.blurContainer]}>
+        <View style={styles.wordContainer }>
+            {word.map((letter, index) => (
+                <Letter key={index} letter={revealedLetters.includes(letter) ? letter : ''}/>
             ))}
         </View>
         <View style={styles.flexSpacer}/>
-        <Keyboard revealedLetters = {revealedLetters} onKeyPress = {handleKeyPress}/>
+        <Keyboard pressedKeys = {pressedKeys} onKeyPress = {handleKeyPress}/>
+
+        {totalWrongGuesses > 8 && (
+            <View style={styles.messageContainer}>
+                <Text style={styles.messageText}>You Lose!</Text>
+            </View>
+        )}
     </View>
   );
 }
@@ -51,5 +65,17 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },flexSpacer: {
         flex:1,
-    }
-})
+    }, blurContainer: {
+        backgroundColor: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white background for blur effect
+    },
+    messageContainer: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 20,
+   },
+        messageText: {
+            color: 'red',
+            fontSize: 24,
+            fontWeight: 'bold',
+        },
+});
