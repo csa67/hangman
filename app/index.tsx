@@ -3,7 +3,8 @@ import { Text, View, StyleSheet } from "react-native";
 import { Letter } from '@/components/Letter';
 import { Keyboard } from '@/components/Keyboard';
 import { GameMessage } from '@/components/GameMessage'
-import { WordDisplay } from '@/components/WordDisplay'
+import { WordDisplay } from '@/components/WordDisplay';
+import {OverlayDialog } from '@/components/OverlayDialog';
 
 export default function Index() {
 
@@ -35,12 +36,19 @@ export default function Index() {
        }
    };
 
+   const resetGame = () => {
+           setWord(generateWord());
+           setPressedKeys({});
+           setRevealedLetters([]);
+           setTotalWrongGuesses(0);
+   };
+
   return (
     <View style={totalWrongGuesses === 8 ? [styles.container, styles.blurContainer] : styles.container}>
         <WordDisplay word={word} revealedLetters = {revealedLetters}/>
         <View style={styles.flexSpacer}/>
         <Keyboard pressedKeys = {pressedKeys} onKeyPress = {handleKeyPress}/>
-        <GameMessage message="You Lose!"/>
+        <OverlayDialog visible={totalWrongGuesses === 8} onClose={resetGame}/>
     </View>
   );
 }
@@ -55,6 +63,6 @@ const styles = StyleSheet.create({
     },flexSpacer: {
         flex:1,
     }, blurContainer: {
-        backgroundColor: 'red', // Semi-transparent white background for blur effect
+        backgroundColor: '#ede0df', // Semi-transparent white background for blur effect
     }
 });
