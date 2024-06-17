@@ -1,10 +1,7 @@
-import React, {useState} from 'react'
-import { StyleSheet, View, TextInput } from 'react-native'
-import { ThemedText } from '@/components/ThemedText'
-
+import { StyleSheet, View, TextInput } from 'react-native';
+import { ThemedText } from '@/components/ThemedText';
 
 export function Letter({letter}){
-
     return (
         <View style={styles.container} className="LetterBox">
             <ThemedText style={styles.box}> {letter} </ThemedText>
@@ -21,7 +18,6 @@ const styles = StyleSheet.create({
     box:{
         padding: 4,
         borderBottomColor: 'black',
-        borderBottomWidth: 4,
         textAlign: 'center',
         fontSize: 24
     }

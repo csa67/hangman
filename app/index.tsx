@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { Text, View, StyleSheet } from "react-native";
 import { Letter } from '@/components/Letter';
 import { Keyboard } from '@/components/Keyboard';
+import { GameMessage } from '@/components/GameMessage'
+import { WordDisplay } from '@/components/WordDisplay'
 
 export default function Index() {
 
@@ -34,20 +36,11 @@ export default function Index() {
    };
 
   return (
-    <View style={[styles.container, totalWrongGuesses > 8 && styles.blurContainer]}>
-        <View style={styles.wordContainer }>
-            {word.map((letter, index) => (
-                <Letter key={index} letter={revealedLetters.includes(letter) ? letter : ''}/>
-            ))}
-        </View>
+    <View style={totalWrongGuesses === 8 ? [styles.container, styles.blurContainer] : styles.container}>
+        <WordDisplay word={word} revealedLetters = {revealedLetters}/>
         <View style={styles.flexSpacer}/>
         <Keyboard pressedKeys = {pressedKeys} onKeyPress = {handleKeyPress}/>
-
-        {totalWrongGuesses > 8 && (
-            <View style={styles.messageContainer}>
-                <Text style={styles.messageText}>You Lose!</Text>
-            </View>
-        )}
+        <GameMessage message="You Lose!"/>
     </View>
   );
 }
@@ -59,23 +52,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 10,
-    },
-    wordContainer:{
-        flexDirection: 'row',
-        marginTop: 20,
     },flexSpacer: {
         flex:1,
     }, blurContainer: {
-        backgroundColor: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white background for blur effect
-    },
-    messageContainer: {
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 20,
-   },
-        messageText: {
-            color: 'red',
-            fontSize: 24,
-            fontWeight: 'bold',
-        },
+        backgroundColor: 'red', // Semi-transparent white background for blur effect
+    }
 });
