@@ -46,6 +46,12 @@ export default function Index() {
        }
    };
 
+
+    const checkWin = () => {
+        return word.split('').every((letter) => revealedLetters.includes(letter));
+    };
+
+
    const resetGame = () => {
            setLoading(true);
            setPressedKeys({});
@@ -57,9 +63,10 @@ export default function Index() {
   return (
     <View style={totalWrongGuesses === 8 ? [styles.container, styles.blurContainer] : styles.container}>
             <WordDisplay word={word} revealedLetters = {revealedLetters}/>
+            <OverlayDialog visible={checkWin()} onClose = {resetGame} result = "Yay! You win!!"/>
             <View style={styles.flexSpacer}/>
             <Keyboard pressedKeys = {pressedKeys} onKeyPress = {handleKeyPress}/>
-            <OverlayDialog visible={totalWrongGuesses === 8} onClose={resetGame}/>
+            <OverlayDialog visible={totalWrongGuesses === 8} onClose={resetGame} result = {`It's ${word}!You Lose!!`}/>
     </View>
   );
 }

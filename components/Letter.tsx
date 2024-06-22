@@ -11,14 +11,13 @@ export function Letter({letter}){
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
-        padding: 10
+        padding: 10,
+        width: 50,
     },
     box:{
-        padding: 4,
         borderBottomColor: 'black',
         textAlign: 'center',
-        fontSize: 24
+        fontSize: 24,
     }
 })

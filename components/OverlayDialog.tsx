@@ -1,7 +1,7 @@
 import {View, StyleSheet, Modal, Pressable} from 'react-native';
 import {ThemedText} from '@/components/ThemedText'
 
-export function OverlayDialog({visible, onClose}){
+export function OverlayDialog({result, visible, onClose}){
 
     return(
        <Modal
@@ -11,12 +11,12 @@ export function OverlayDialog({visible, onClose}){
         >
           <View style={styles.modalContainer}>
                         <View style={styles.modalView}>
-                            <ThemedText style={styles.modalText}>You Lose!</ThemedText>
+                            <ThemedText> {result} </ThemedText>
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
                                 onPress={onClose}
                             >
-                                <ThemedText style={styles.textStyle}>New Game</ThemedText>
+                                <ThemedText>New Game</ThemedText>
                             </Pressable>
                         </View>
                     </View>
@@ -29,14 +29,13 @@ export function OverlayDialog({visible, onClose}){
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
             },
             modalView: {
                 width: '80%',
-                backgroundColor: 'red',
+                backgroundColor: '#e0ddd5',
                 borderRadius: 20,
                 padding: 35,
-                alignItems: 'center',
+                justifyContent: 'center',
                 shadowColor: '#000',
                 shadowOffset: {
                     width: 0,
@@ -47,7 +46,7 @@ export function OverlayDialog({visible, onClose}){
                 elevation: 5,
             },
             button: {
-                borderRadius: 20,
+                borderRadius: 5,
                 padding: 10,
                 elevation: 2,
             },

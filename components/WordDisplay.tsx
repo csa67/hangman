@@ -16,5 +16,9 @@ const styles = StyleSheet.create({
   wordContainer: {
     flexDirection: 'row',
     marginTop: 20,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    width: '100%'
   },
 })
