@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from "react-native";
 import { Letter } from '@/components/Letter';
 import { Keyboard } from '@/components/Keyboard';
@@ -8,26 +8,36 @@ import {OverlayDialog } from '@/components/OverlayDialog';
 
 export default function Index() {
 
-    // Generate a random word with 6 letters
-    const generateWord = () => {
-        const word = [];
-        for (let i = 0; i < 6; i++) {
-            const answer = Math.floor(Math.random() * 26);
-            const letter = String.fromCharCode(65 + answer);
-            word.push(letter);
-        }
-        return word;
-        console.log(word);
-    };
+     //Get a random word from server.
+     const [word, setWord] = useState('');
+     const [loading, setLoading] = useState(true);
+     const [ pressedKeys, setPressedKeys ] = useState({});
+     const [ revealedLetters, setRevealedLetters ] = useState([]);
+     const [totalWrongGuesses, setTotalWrongGuesses] = useState(0);
 
-   const [word, setWord] = useState(generateWord());
-   const [ pressedKeys, setPressedKeys ] = useState({});
-   const [ revealedLetters, setRevealedLetters ] = useState([]);
-   const [totalWrongGuesses, setTotalWrongGuesses] = useState(0);
+     useEffect(() => {
+        generateWord();
+     },[]);
+
+   function generateWord(){
+    const url = "https://random-word-api.herokuapp.com/word"
+
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data[0])
+            setWord(data[0].toUpperCase())
+            setLoading(false)
+           })
+        .catch((error) => {
+            console.error(error)
+            setLoading(false)
+        });
+   }
 
    const handleKeyPress = (key) => {
-
        const isMatch = word.includes(key);
+       console.log(`Is match: ${isMatch}`);
        setPressedKeys((prev) => ({ ...prev, [key]: isMatch}));
        if(isMatch){
             setRevealedLetters((prev) => [...prev, key]);
@@ -37,18 +47,19 @@ export default function Index() {
    };
 
    const resetGame = () => {
-           setWord(generateWord());
+           setLoading(true);
            setPressedKeys({});
            setRevealedLetters([]);
            setTotalWrongGuesses(0);
+           generateWord();
    };
 
   return (
     <View style={totalWrongGuesses === 8 ? [styles.container, styles.blurContainer] : styles.container}>
-        <WordDisplay word={word} revealedLetters = {revealedLetters}/>
-        <View style={styles.flexSpacer}/>
-        <Keyboard pressedKeys = {pressedKeys} onKeyPress = {handleKeyPress}/>
-        <OverlayDialog visible={totalWrongGuesses === 8} onClose={resetGame}/>
+            <WordDisplay word={word} revealedLetters = {revealedLetters}/>
+            <View style={styles.flexSpacer}/>
+            <Keyboard pressedKeys = {pressedKeys} onKeyPress = {handleKeyPress}/>
+            <OverlayDialog visible={totalWrongGuesses === 8} onClose={resetGame}/>
     </View>
   );
 }
