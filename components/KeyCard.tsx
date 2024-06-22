@@ -1,4 +1,4 @@
-import {View, TouchableOpacity, StyleSheet } from 'react-native';
+import {View, Pressable, StyleSheet } from 'react-native';
 import {ThemedText } from '@/components/ThemedText'
 
 export function KeyCard({value, width, onPress, isMatch}){
@@ -12,9 +12,16 @@ export function KeyCard({value, width, onPress, isMatch}){
     }
 
     return (
-        <TouchableOpacity style={[styles.container, {width: width, backgroundColor: getBackgroundColor()}]} onPress= {onPress}>
+        <Pressable
+         style={({pressed}) =>
+         [styles.container,
+            {width: width,
+            backgroundColor: getBackgroundColor(),
+            opacity: pressed ? 0.5 : 1,
+            },
+         ]} onPress= {onPress}>
             <ThemedText style={styles.box}> {value} </ThemedText>
-        </TouchableOpacity>
+        </Pressable>
     )
 }
 
