@@ -1,11 +1,11 @@
-import { View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 import { Letter } from '@/components/Letter';
 
 export function WordDisplay({ word, revealedLetters }){
   return (
     <View style={styles.wordContainer}>
-      {word.map((letter, index) => (
+      {word.split('').map((letter, index) => (
         <Letter key={index} letter={revealedLetters.includes(letter) ? letter : '_'} />
       ))}
     </View>
