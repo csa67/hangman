@@ -33,7 +33,7 @@ export function OverlayDialog({visible, onClose}){
             },
             modalView: {
                 width: '80%',
-                backgroundColor: 'white',
+                backgroundColor: 'red',
                 borderRadius: 20,
                 padding: 35,
                 alignItems: 'center',
