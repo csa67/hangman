@@ -1,7 +1,17 @@
+import React, {useState} from 'react';
 import {View, Pressable, StyleSheet } from 'react-native';
 import {ThemedText } from '@/components/ThemedText'
 
 export function KeyCard({value, width, onPress, isMatch}){
+
+    const [isDisabled, setIsDisabled] = useState(false);
+
+    const handlePress = () => {
+        if (!isDisabled) {
+            onPress();
+            setIsDisabled(true);
+        }
+    };
 
     const getBackgroundColor = () => {
        if(isMatch!=null){
@@ -19,7 +29,8 @@ export function KeyCard({value, width, onPress, isMatch}){
             backgroundColor: getBackgroundColor(),
             opacity: pressed ? 0.5 : 1,
             },
-         ]} onPress= {onPress}>
+         ]} onPress= {handlePress}
+          disabled={isDisabled}>
             <ThemedText style={styles.box}> {value} </ThemedText>
         </Pressable>
     )
