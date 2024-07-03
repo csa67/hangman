@@ -22,8 +22,6 @@ Hangman is a classic word-guessing game implemented as a mobile application usin
 - **Frontend:** React Native, Expo, JavaScript, HTML, CSS
 - **Backend:** Node.js
 - **Data Handling:** AJAX, JSON
-- **Testing:** Jest, React Native Testing Library
-- **CI/CD:** GitHub Actions
 
 ## 🚀 Installation
 To set up the project locally, follow these steps:
