@@ -1,24 +1,55 @@
-# Welcome to your Expo app 👋
+# 🎮 Hangman Game Application
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Table of Contents
+- [📖 Introduction](#introduction)
+- [✨ Features](#features)
+- [🛠️ Technologies Used](#technologies-used)
+- [🚀 Installation](#installation)
+- [📱 Usage](#usage)
 
-## Get started
+## 📖 Introduction
+Hangman is a classic word-guessing game implemented as a mobile application using Node.js and React Native with Expo. The app provides an interactive and engaging user experience across iOS and Android platforms.
 
-1. Install dependencies
+## ✨ Features
+- 🔠 Dynamic word selection fetched from an external API.
+- 🖱️ User-friendly on-screen keyboard with disabled keys after one click to prevent repeated guesses.
+- 🎨 Dynamic feedback and theming for guessed letters.
+- 🎉 Win and 💔 lose overlay dialogs with reset game functionality.
+- 📡 Real-time data updates using AJAX and JSON.
+- 📱 Responsive and interactive UI design.
 
+## 🛠️ Technologies Used
+- **Frontend:** React Native, Expo, JavaScript, HTML, CSS
+- **Backend:** Node.js
+- **Data Handling:** AJAX, JSON
+
+## 🚀 Installation
+To set up the project locally, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/csa67/hangman.git
+   cd hangman
+   ```
+
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. **Start the app:**
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+In the output, you'll find options to open the app in a development build, Android emulator, iOS simulator, or Expo Go.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📱 Usage
+- Open the app in your chosen environment.
+- Start a new game and use the on-screen keyboard to guess letters.
+- The app will fetch a random word from an external API.
+- Correct guesses will reveal the letters in the word.
+- Incorrect guesses will increase the wrong guess count.
+- If all letters are guessed correctly, a win dialog will appear.
+- If the maximum number of wrong guesses is reached, a lose dialog will appear with the correct word.
+- You can reset the game using the dialog options.
