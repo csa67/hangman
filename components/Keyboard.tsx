@@ -1,7 +1,11 @@
 import {View, StyleSheet, Dimensions} from 'react-native';
 import { KeyCard } from '@/components/KeyCard'
 
-export function Keyboard({onKeyPress, pressedKeys}){
+interface KeyboardProps{
+    onKeyPress: (key: string) => void,
+    pressedKeys: {[key: string] : boolean};
+}
+export function Keyboard({onKeyPress, pressedKeys}: KeyboardProps){
 
     const {width: screenWidth} = Dimensions.get('window');
     const keyWidth = (screenWidth - 20)/10 - 6;

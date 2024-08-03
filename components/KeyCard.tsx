@@ -2,9 +2,15 @@ import React, {useState, useEffect} from 'react';
 import {View, Pressable, StyleSheet } from 'react-native';
 import {ThemedText } from '@/components/ThemedText'
 
-export function KeyCard({value, width, onPress, isMatch}){
+interface KeyCardProps{
+    value: string,
+    width: number,
+    onPress: () => void,
+    isMatch: boolean | null
+}
+export function KeyCard({value, width, onPress, isMatch}: KeyCardProps){
 
-    const [isDisabled, setIsDisabled] = useState(false);
+    const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
     useEffect(() => {
         setIsDisabled(false)
