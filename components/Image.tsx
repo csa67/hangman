@@ -5,7 +5,11 @@ import FastImage from 'react-native-fast-image';
 // Import the JSON file
 const images = require('../assets/hangman_images.json'); // Adjust the path as needed
 
-const HangmanApngReload = ({ imageKey }) => {
+interface HangmanApngReloadProps {
+  imageKey: string;
+}
+
+const HangmanApngReload : React.FC<HangmanApngReloadProps> = ({ imageKey }) => {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
   // Define the image dimensions based on screen size (e.g., 50% of screen width and height)

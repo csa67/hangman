@@ -1,10 +1,9 @@
 import React, {useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from "react-native";
-import { Letter } from '@/components/Letter';
 import { Keyboard } from '@/components/Keyboard';
-import { GameMessage } from '@/components/GameMessage'
 import { WordDisplay } from '@/components/WordDisplay';
 import {OverlayDialog } from '@/components/OverlayDialog';
+import { ThemedView } from '@/components/ThemedView';
 
 export default function Index() {
 
@@ -60,13 +59,13 @@ export default function Index() {
    };
 
   return (
-    <View style={totalWrongGuesses === 8 ? [styles.container, styles.blurContainer] : styles.container}>
+    <ThemedView style={styles.container}>
             <WordDisplay word={word} revealedLetters = {revealedLetters}/>
             <OverlayDialog visible={checkWin()} onClose = {resetGame} result = "Yay! You win!!"/>
             <View style={styles.flexSpacer}/>
             <Keyboard pressedKeys = {pressedKeys} onKeyPress = {handleKeyPress}/>
             <OverlayDialog visible={totalWrongGuesses === 8} onClose={resetGame} result = {`It's ${word}!You Lose!!`}/>
-    </View>
+    </ThemedView>
   );
 }
 
@@ -79,7 +78,5 @@ const styles = StyleSheet.create({
         padding: 10,
     },flexSpacer: {
         flex:1,
-    }, blurContainer: {
-        backgroundColor: '#ede0df', // Semi-transparent white background for blur effect
     }
 });
