@@ -1,28 +1,23 @@
-import { StyleSheet, View, TextInput } from 'react-native';
-import { ThemedText } from '@/components/ThemedText';
+import React from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface LetterProps {
     letter: string;
 }
 
-export function Letter({letter} : LetterProps){
+export const Letter = ({ letter }: LetterProps) => {
+    const textColor = useThemeColor({ light: '#000', dark: '#fff' }, 'text');  
+
     return (
-        <View style={styles.container}>
-            <ThemedText style={styles.box}> {letter} </ThemedText>
-        </View>
+        <Text style={[styles.letter, { color: textColor }]}>{letter}</Text>
     );
-}
+};
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        padding: 10,
-        width: 50,
+    letter: {
+        fontSize: 24,  
+        fontWeight: 'bold',
+        marginHorizontal: 4, 
     },
-    box:{
-        borderBottomColor: 'black',
-        textAlign: 'center',
-        color: 'black',
-        fontSize: 24,
-    }
-})
+});

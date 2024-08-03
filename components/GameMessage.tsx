@@ -1,11 +1,15 @@
 import { View, Text, StyleSheet } from 'react-native';
 import {ThemedText} from '@/components/ThemedText';
+import { ThemedView } from './ThemedView';
 
-export function GameMessage({ message }){
+interface GameMessageProps{
+  message: string;
+}
+export function GameMessage({ message }: GameMessageProps){
   return (
-    <View style={styles.messageContainer}>
+    <ThemedView style={styles.messageContainer}>
       <ThemedText style={styles.messageText}>{message}</ThemedText>
-    </View>
+    </ThemedView>
   );
 };
 
