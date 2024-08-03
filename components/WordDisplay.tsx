@@ -2,7 +2,12 @@ import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
 import { Letter } from '@/components/Letter';
 
-export function WordDisplay({ word, revealedLetters }){
+interface WordDisplayProps {
+  word: string;
+  revealedLetters: string[];
+}
+
+export function WordDisplay({ word, revealedLetters }: WordDisplayProps){
   return (
     <View style={styles.wordContainer}>
       {word.split('').map((letter, index) => (

@@ -1,9 +1,13 @@
 import { StyleSheet, View, TextInput } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 
-export function Letter({letter}){
+interface LetterProps {
+    letter: string;
+}
+
+export function Letter({letter} : LetterProps){
     return (
-        <View style={styles.container} className="LetterBox">
+        <View style={styles.container}>
             <ThemedText style={styles.box}> {letter} </ThemedText>
         </View>
     );
@@ -18,6 +22,7 @@ const styles = StyleSheet.create({
     box:{
         borderBottomColor: 'black',
         textAlign: 'center',
+        color: 'black',
         fontSize: 24,
     }
 })

@@ -19,21 +19,20 @@ export default function Index() {
         generateWord();
      },[]);
 
-   function generateWord(){
-    const url = "https://random-word-api.herokuapp.com/word"
+    async function generateWord() {
+        const url = "https://random-word-api.herokuapp.com/word";
 
-    fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data[0])
-            setWord(data[0].toUpperCase())
-            setLoading(false)
-           })
-        .catch((error) => {
-            console.error(error)
-            setLoading(false)
-        });
-   }
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data[0]);
+            setWord(data[0].toUpperCase());
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+            setLoading(false);
+        }
+    }
 
    const handleKeyPress = (key) => {
        const isMatch = word.includes(key);
@@ -48,7 +47,7 @@ export default function Index() {
 
 
     const checkWin = () => {
-        return word.split('').every((letter) => revealedLetters.includes(letter));
+        return word !== '' && word.split('').every((letter) => revealedLetters.includes(letter));
     };
 
 

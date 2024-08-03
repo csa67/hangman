@@ -1,7 +1,12 @@
 import {View, StyleSheet, Modal, Pressable} from 'react-native';
 import {ThemedText} from '@/components/ThemedText'
 
-export function OverlayDialog({result, visible, onClose}){
+interface OverLayDialogProps{
+    result: string,
+    visible: boolean,
+    onClose: () => void
+}
+export function OverlayDialog({result, visible, onClose} : OverLayDialogProps){
 
     return(
        <Modal
@@ -54,7 +59,7 @@ export function OverlayDialog({result, visible, onClose}){
                 backgroundColor: '#2196F3',
             },
             textStyle: {
-                color: 'white',
+                color: 'black',
                 fontWeight: 'bold',
                 textAlign: 'center',
             },

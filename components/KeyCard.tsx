@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Pressable, StyleSheet } from 'react-native';
 import {ThemedText } from '@/components/ThemedText'
 
 export function KeyCard({value, width, onPress, isMatch}){
 
     const [isDisabled, setIsDisabled] = useState(false);
+
+    useEffect(() => {
+        setIsDisabled(false)
+    },[isMatch]);
 
     const handlePress = () => {
         if (!isDisabled) {
